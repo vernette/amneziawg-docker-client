@@ -13,7 +13,8 @@ cleanup() {
   done
 }
 
-trap cleanup EXIT TERM INT
+trap cleanup EXIT
+trap 'exit 0' INT TERM
 
 if ! ls "$CONFIG_DIR"/*.conf >/dev/null 2>&1; then
   echo "[entrypoint] No .conf files found in $CONFIG_DIR"
@@ -27,4 +28,5 @@ for conf in "$CONFIG_DIR"/*.conf; do
   INTERFACES="$INTERFACES $iface"
 done
 
-sleep infinity
+sleep infinity &
+wait
