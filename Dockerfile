@@ -1,13 +1,11 @@
 # amneziawg-go (userspace)
 FROM golang:1.26-alpine AS build-go
 
-ARG AWG_GO_REF=master
-
 WORKDIR /src
 
 RUN apk add --no-cache git make
 
-RUN git clone --depth 1 --branch "${AWG_GO_REF}" https://github.com/amnezia-vpn/amneziawg-go.git . && \
+RUN git clone --depth 1 https://github.com/amnezia-vpn/amneziawg-go.git . && \
   make
 
 # amneziawg-tools (awg + awg-quick)

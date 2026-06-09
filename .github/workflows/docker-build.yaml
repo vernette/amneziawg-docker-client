@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tools_ref:
-        description: "amneziawg-tools"
+        description: "amneziawg-tools tag"
         required: false
 
 env:
@@ -27,11 +27,7 @@ jobs:
               https://api.github.com/repos/amnezia-vpn/amneziawg-tools/releases/latest \
               | jq -r .tag_name)
           fi
-          GO=$(curl -fsSL \
-            https://api.github.com/repos/amnezia-vpn/amneziawg-go/releases/latest \
-            | jq -r .tag_name)
           echo "tools=$TOOLS" >> "$GITHUB_OUTPUT"
-          echo "go=$GO"       >> "$GITHUB_OUTPUT"
 
       - name: Skip if image tag already exists
         id: exists
